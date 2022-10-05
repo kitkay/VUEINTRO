@@ -21,6 +21,12 @@ app.component('review-form', {
                 <option>1</option>
             </select>
 
+            <label for="recommended">Would you recommend this product?</label>
+            <select id="recommended" v-model="recommended">
+                <option>YES</option>
+                <option>NO</option>
+            </select>
+
             <input class="button" type="submit" value="Submit" />
         </form>
     `,
@@ -31,7 +37,8 @@ app.component('review-form', {
         return {
             name: '',
             review: '',
-            rating: null
+            rating: null,
+            recommended: ''
         }
     },
     methods: {
@@ -42,6 +49,7 @@ app.component('review-form', {
                 this.name === ''
                 || this.review === ''
                 || this.rating === null
+                || this.recommended === ''
             ) {
                 alert('Review is incomplete. All field is required.');
                 return;
@@ -51,7 +59,8 @@ app.component('review-form', {
             let productReview = {
                 name: this.name,
                 review: this.review,
-                rating: this.rating
+                rating: this.rating,
+                recommended: this.recommended
             }
             //Now we need to submit the data. using the name we could listen to it.
             this.$emit('review-submitted', productReview);
@@ -59,6 +68,7 @@ app.component('review-form', {
             this.name = '';
             this.review = '';
             this.rating = null;
+            this.recommended = '';
         }
     }
 });
